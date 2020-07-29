@@ -55,6 +55,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   int pageNum = 0;
+  int currSelect = 0;
 
   Widget setPage(int i) {
     switch (i) {
@@ -81,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Text setTitle(int i) {
     switch (i) {
       case 0:
-        return Text('전적 검색');
+        return Text('Best K-Pop');
         break;
       case 1:
         return Text('브롤러 정보');
@@ -104,8 +105,87 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: setTitle(pageNum),
         backgroundColor: setAppBarColor(pageNum),
+//        leading:           IconButton(
+//          icon: Icon(Icons.menu),
+//          onPressed: () {
+//            print('hello');
+//          },
+//        ),
       ),
       body: setPage(pageNum),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('Drawer Header'),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text('All Time'),
+              leading: currSelect == 0 ? Icon(Icons.star , color: Colors.redAccent,) :Icon(Icons.star) ,
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('2019 Best K-POP'),
+              leading: currSelect == 2019 ? Icon(Icons.star , color: Colors.redAccent,) :Icon(Icons.star),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('2018 Best K-POP'),
+              leading: currSelect == 2018 ? Icon(Icons.star , color: Colors.redAccent,) :Icon(Icons.star),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('2017 Best K-POP'),
+              leading: currSelect == 2017 ? Icon(Icons.star , color: Colors.redAccent,) :Icon(Icons.star),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('2016 Best K-POP'),
+              leading: currSelect == 2016 ? Icon(Icons.star , color: Colors.redAccent,) :Icon(Icons.star),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('2015 Best K-POP'),
+              leading: currSelect == 2015 ? Icon(Icons.star , color: Colors.redAccent,) :Icon(Icons.star),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: ConvexAppBar(
         backgroundColor: setAppBarColor(pageNum),
         items: [

@@ -14,13 +14,11 @@ class _RecordState extends State<Record> {
   static final String key =
       "AIzaSyDwePwfJY8uHsLK6gXEJWeAxSG-IB9APVs"; // ** ENTER YOUTUBE API KEY HERE **
   static final String type = "video";
-
-  YoutubeAPI ytApi = new YoutubeAPI(key, maxResults: 100, type: type);
+  YoutubeAPI ytApi = new YoutubeAPI(key, maxResults: 50, type: type);
 
   List<YT_API> ytResult = [];
 
   ScrollController gridController = new ScrollController();
-
 
   callAPI() async {
     print('UI callled');
@@ -29,7 +27,11 @@ class _RecordState extends State<Record> {
     ytResult = ytResult + (await ytApi.nextPage());
     setState(() {
       print('UI Updated');
-      print(ytResult[99].title.toString() +  'vs ' + ytResult[98].title.toString() + 'vs ' + ytResult[97].title.toString() +
+      print(ytResult[99].title.toString() +
+          'vs ' +
+          ytResult[98].title.toString() +
+          'vs ' +
+          ytResult[97].title.toString() +
           ', ' +
           ytResult[98].kind +
           ', ' +
@@ -37,10 +39,11 @@ class _RecordState extends State<Record> {
           ', ' +
           ytResult[98].thumbnail['default']['url'] +
           ', ' +
-          ytResult[99].publishedAt + ' vs '
-      +  ytResult[98].publishedAt+ ' vs '
-          + ytResult[97].publishedAt
-      );
+          ytResult[99].publishedAt +
+          ' vs ' +
+          ytResult[98].publishedAt +
+          ' vs ' +
+          ytResult[97].publishedAt);
     });
     _setList();
   }
@@ -67,7 +70,7 @@ class _RecordState extends State<Record> {
             clipBehavior: Clip.antiAlias,
             elevation: 2,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(7.0),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -85,13 +88,16 @@ class _RecordState extends State<Record> {
                 Expanded(
                   flex: 1,
                   child: Container(
-                      padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-                      child:
-                          Text(
-                            ytResult[index].title.replaceAll('&#39;' , "'").replaceAll('&quot;', "'").replaceAll('&amp;', '&'),
-                            softWrap: true,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
+                    padding: EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
+                    child: Text(
+                      ytResult[index]
+                          .title
+                          .replaceAll('&#39;', "'")
+                          .replaceAll('&quot;', "'")
+                          .replaceAll('&amp;', '&'),
+                      softWrap: true,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 )
               ],
@@ -109,7 +115,7 @@ class _RecordState extends State<Record> {
     return Scaffold(
         body: AnimationLimiter(
             child: GridView.count(
-              controller: gridController,
+                controller: gridController,
                 childAspectRatio: 1.0,
                 crossAxisCount: 2,
                 children: _setList())));
